@@ -1,0 +1,68 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_RemindersTab(object):
+    def setupUi(self, RemindersTab):
+        RemindersTab.setObjectName("RemindersTab")
+        RemindersTab.resize(218, 228)
+        self.centralwidget = QtWidgets.QWidget(RemindersTab)
+        self.centralwidget.setObjectName("centralwidget")
+        self.namecol = QtWidgets.QLabel(self.centralwidget)
+        self.namecol.setGeometry(QtCore.QRect(20, 40, 47, 13))
+        self.namecol.setObjectName("namecol")
+        self.DateTimecol1 = QtWidgets.QLabel(self.centralwidget)
+        self.DateTimecol1.setGeometry(QtCore.QRect(125, 40, 100, 16))
+        self.DateTimecol1.setObjectName("DateTimecol1")
+        self.Sidreminder1 = QtWidgets.QTextEdit(self.centralwidget)
+        self.Sidreminder1.setGeometry(QtCore.QRect(20, 70, 181, 31))
+        self.Sidreminder1.setObjectName("Sidreminder1")
+        self.virreminder2 = QtWidgets.QTextEdit(self.centralwidget)
+        self.virreminder2.setGeometry(QtCore.QRect(20, 110, 181, 31))
+        self.virreminder2.setObjectName("virreminder2")
+        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit.setGeometry(QtCore.QRect(20, 150, 181, 21))
+        self.textEdit.setObjectName("textEdit")
+        self.commandLinkButton = QtWidgets.QCommandLinkButton(self.centralwidget)
+        self.commandLinkButton.setGeometry(QtCore.QRect(30, 200, 185, 41))
+        self.commandLinkButton.setObjectName("commandLinkButton")
+        RemindersTab.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(RemindersTab)
+        self.statusbar.setObjectName("statusbar")
+        RemindersTab.setStatusBar(self.statusbar)
+
+        self.retranslateUi(RemindersTab)
+        QtCore.QMetaObject.connectSlotsByName(RemindersTab)
+
+    def retranslateUi(self, RemindersTab):
+        _translate = QtCore.QCoreApplication.translate
+        RemindersTab.setWindowTitle(_translate("RemindersTab", "MainWindow"))
+        self.namecol.setText(_translate("RemindersTab", "Name"))
+        self.DateTimecol1.setText(_translate("RemindersTab", "Date & Time"))
+        self.Sidreminder1.setHtml(_translate("RemindersTab",
+                                             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                             "p, li { white-space: pre-wrap; }\n"
+                                             "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Doctor Appoitment --12/12/20 - 7:00PM</p>\n"
+                                             "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p></body></html>"))
+        self.virreminder2.setHtml(_translate("RemindersTab",
+                                             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                             "p, li { white-space: pre-wrap; }\n"
+                                             "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Physics class -------- --04/3/20 - 9:00AM</p>\n"
+                                             "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+                                             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p></body></html>"))
+        self.commandLinkButton.setText(_translate("RemindersTab", "CommandLinkButton"))
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    RemindersTab = QtWidgets.QMainWindow()
+    ui = Ui_RemindersTab()
+    ui.setupUi(RemindersTab)
+    RemindersTab.show()
+    sys.exit(app.exec_())
