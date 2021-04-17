@@ -3,7 +3,6 @@ import pyttsx3
 import datetime
 import wikipedia
 import webbrowser
-import time
 import wolframalpha
 
 engine = pyttsx3.init()
@@ -12,16 +11,19 @@ r = sr.Recognizer()
 
 mic = sr.Microphone()
 
-def voice_parameter(i,j):
+
+def voice_parameter(i, j):
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[i].id)
     rate = engine.getProperty('rate')
-    engine.setProperty('rate', rate+j)
+    engine.setProperty('rate', rate + j)
 
 def firstoutput():
+    voice_parameter(7, 10)
     engine.say('Hello, My name is Mike')
     engine.say('how may I help you?')
     engine.runAndWait()
+
 
 def record():
     with mic as source:
@@ -30,6 +32,7 @@ def record():
         audio = r.listen(source)
         return audio
 
+
 def convert(audio):
     try:
         input1 = r.recognize_google(audio)
@@ -37,6 +40,7 @@ def convert(audio):
         print('Sorry I am unable to understand what you said.')
         input1 = ''
     return input1
+
 
 def process(input1):
     if 'how are you' in input1:
@@ -61,6 +65,7 @@ def process(input1):
     elif 'play a song' in input1:
         webbrowser.open_new_tab('https://open.spotify.com/playlist/4Qld8MoiinGP3X6hKhEyic')
         ouput1 = 'Opening Spotify'
+        return ouput1
     elif 'open' in input1:
         input2 = input1.replace('open ', '')
         input3 = input2.replace(' ', '')
@@ -72,8 +77,7 @@ def process(input1):
             engine.say('Searching Wikipedia...')
             input1 = input1.replace('wikipedia', '')
             results = wikipedia.summary(input1, sentences=3)
-            engine.say('According to wikipedia')
-            output1 = results
+            output1 = 'According to wikipedia ' + results
         except:
             output1 = 'Asked query not found in wikipedia'
     else:
@@ -85,36 +89,35 @@ def process(input1):
                 output1 = next(res.results).text
             except:
                 results = wikipedia.summary(input1, sentences=3)
-                engine.say('According to wikipedia')
-                output1 = results
+
+                output1 = 'According to wikipedia ' + results
         except:
-            input2 = 'https://www.google.com/search?q=' + input1
-            webbrowser.open_new_tab(input2)
-            output1 = 'searching in google for \"' + input1 + '\"'
+            try:
+                input2 = 'https://www.google.com/search?q=' + input1
+                webbrowser.open_new_tab(input2)
+                output1 = 'searching in google for \"' + input1 + '\"'
+            except:
+                pass
     return output1
+
 
 def edit(output1):
-    if len(output1) > 200:
-        output1 = output1[:300] + '...'
+    if len(output1) > 500:
+        output1 = output1[:500] + '...'
+    output1 = output1.replace('(', ' ')
+    output1 = output1.replace(')', ' ')
+    output1 = output1.replace(';', ' ')
+    output1 = output1.replace('\'', ' ')
     return output1
 
-def speak(output1):
-    print(output1)
-    engine.say(output1[:200])
-    engine.runAndWait()
 
-def onecycle():
+
+def voiceoutput():
+    voice_parameter(7, 10)
     audio = record()
     input1 = convert(audio)
     output1 = process(input1)
     output1 = edit(output1)
-    speak(output1)
-
-voice_parameter(7,10)
-
-firstoutput()
-while True :
-    onecycle()
-    time.sleep(10)
+    return output1
 
 
