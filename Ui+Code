@@ -1,0 +1,81 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+from rmeinders import Ui_RemindersTab
+from main import *
+import os
+
+
+vc = ''
+
+class Ui_MainWindow(object):
+    vc = ''
+    def reminders(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_RemindersTab()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def voiceouput(self):
+        global vc
+        vc = voiceoutput()
+        self.retranslateUi(MainWindow)
+        os.system("/usr/bin/say " + vc)
+        print(vc)
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(380, 700)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.backgroundphoto = QtWidgets.QLabel(self.centralwidget)
+        self.backgroundphoto.setGeometry(QtCore.QRect(0, -10, 381, 700))
+        self.backgroundphoto.setText("")
+        self.backgroundphoto.setPixmap(QtGui.QPixmap("bg.jpg"))
+        self.backgroundphoto.setScaledContents(True)
+        self.backgroundphoto.setObjectName("backgroundphoto")
+        self.reminders1 = QtWidgets.QPushButton(self.centralwidget)
+        self.reminders1.setGeometry(QtCore.QRect(140, 20, 100, 23))
+        self.reminders1.setObjectName("reminders1")
+
+        self.reminders1.clicked.connect(self.reminders)
+
+        self.outputbox = QtWidgets.QLabel(self.centralwidget)
+        self.outputbox.setGeometry(QtCore.QRect(10, 390, 361, 200))
+        self.outputbox.setObjectName("outputbox")
+        self.outputbox.setAutoFillBackground(True)
+        self.outputbox.setWordWrap(True)
+
+        self.microphone = QtWidgets.QPushButton(self.centralwidget)
+        self.microphone.setGeometry(QtCore.QRect(120, 610, 141, 41))
+        self.microphone.setObjectName("microphone")
+
+        self.microphone.clicked.connect(self.voiceouput)
+
+        self.AImikephoto = QtWidgets.QLabel(self.centralwidget)
+        self.AImikephoto.setGeometry(QtCore.QRect(10, 60, 361, 311))
+        self.AImikephoto.setText("")
+        self.AImikephoto.setPixmap(QtGui.QPixmap("AI.jpg"))
+        self.AImikephoto.setScaledContents(True)
+        self.AImikephoto.setObjectName("AImikephoto")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.reminders1.setText(_translate("MainWindow", "Reminders"))
+        self.microphone.setText(_translate("MainWindow", "Microphone"))
+        self.outputbox.setText(_translate("MainWindow", vc))
+
+if __name__ == "__main__":
+    import sys
+    firstoutput()
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
